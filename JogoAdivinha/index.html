@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Jogo de Adivinhação</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #c09b75;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .card {
+        background: #eee;
+        width: 320px;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        text-align: center;
+      }
+
+      h2 {
+        margin-bottom: 10px;
+      }
+
+      .letters {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+      }
+
+      .letter-box {
+        width: 35px;
+        height: 40px;
+        background: #f5d2b3;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      input {
+        padding: 8px;
+        width: 80%;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: none;
+        text-align: center;
+      }
+
+      button {
+        background: #f57c00;
+        border: none;
+        color: white;
+        padding: 10px;
+        width: 100%;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 5px;
+      }
+
+      button:hover {
+        background: #e65100;
+      }
+
+      .info {
+        font-size: 14px;
+        margin: 5px 0;
+      }
+      .score {
+        margin-top: 10px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2>🎯 JOGO ADIVINHAÇÃO</h2>
+
+      <div class="letters" id="letters"></div>
+
+      <div class="info" id="hint"></div>
+      <div class="info" id="attempts"></div>
+      <div class="info" id="wrong">Letras erradas:</div>
+
+      <input type="text" id="input" maxlength="1" placeholder="Letra" />
+      <button onclick="guessLetter()">Tentar</button>
+
+      <div class="score">🏆 Pontuação: <span id="score">0</span></div>
+      <div class="score">🥇 Recorde: <span id="highscore">0</span></div>
+
+      <button onclick="resetGame()">Resetar Jogo</button>
+      <button onclick="resetHighscore()">Resetar Recorde</button>
+    </div>
+
+    <script>
+      const categories = {
+        "🌍 País": ["brasil", "canada", "japao", "italia"],
+        "🐶 Animal": ["gato", "cachorro", "elefante", "tigre"],
+        "🍎 Comida": ["pizza", "hamburguer", "sushi", "lasanha"],
+        "🪐 Planeta": ["terra", "marte", "venus", "saturno"],
+      };
+
+      let word = "";
+      let category = "";
+      let guessed = [];
+      let attempts = 5;
+      let score = 0;
+      let highscore = localStorage.getItem("highscore") || 0;
+
+      function pickRandomWord() {
+        const keys = Object.keys(categories);
+        category = keys[Math.floor(Math.random() * keys.length)];
+        const words = categories[category];
+        word = words[Math.floor(Math.random() * words.length)];
+      }
+
+      function renderWord() {
+        const container = document.getElementById("letters");
+        container.innerHTML = "";
+
+        for (let letter of word) {
+          const div = document.createElement("div");
+          div.classList.add("letter-box");
+          div.textContent = guessed.includes(letter) ? letter : "";
+          container.appendChild(div);
+        }
+      }
+
+      function guessLetter() {
+        const input = document.getElementById("input");
+        const letter = input.value.toLowerCase();
+        input.value = "";
+
+        if (!letter) return;
+
+        if (word.includes(letter)) {
+          if (!guessed.includes(letter)) {
+            guessed.push(letter);
+            score += 10;
+          }
+        } else {
+          attempts--;
+          score -= 5;
+          document.getElementById("wrong").textContent += " " + letter;
+        }
+
+        updateUI();
+        checkGame();
+      }
+
+      function updateUI() {
+        document.getElementById("attempts").textContent =
+          "Tentativas restantes: " + attempts;
+        document.getElementById("score").textContent = score;
+        document.getElementById("highscore").textContent = highscore;
+        document.getElementById("hint").textContent = "Dica: " + category;
+        renderWord();
+      }
+
+      function checkGame() {
+        const won = word.split("").every((l) => guessed.includes(l));
+
+        if (won) {
+          score += 50;
+          if (score > highscore) {
+            highscore = score;
+            localStorage.setItem("highscore", highscore);
+            alert("🏆 Novo recorde: " + highscore);
+          } else {
+            alert("🎉 Você ganhou! +50 pontos");
+          }
+          resetGame();
+        }
+
+        if (attempts <= 0) {
+          alert("💀 Você perdeu! A palavra era: " + word);
+          score = 0;
+          resetGame();
+        }
+      }
+
+      function resetGame() {
+        guessed = [];
+        attempts = 5;
+        document.getElementById("wrong").textContent = "Letras erradas:";
+        pickRandomWord();
+        updateUI();
+      }
+
+      function resetHighscore() {
+        highscore = 0;
+        localStorage.setItem("highscore", 0);
+        document.getElementById("highscore").textContent = 0;
+        alert("🏆 Recorde resetado!");
+      }
+
+      // iniciar jogo
+      pickRandomWord();
+      updateUI();
+      // suporte ao teclado (Enter)
+      document
+        .getElementById("input")
+        .addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            guessLetter();
+          }
+        });
+    </script>
+  </body>
+</html>
