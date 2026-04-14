@@ -1,0 +1,146 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  background: rgb(255, 255, 255);
+}
+form {
+  margin: 15px auto;
+  border: 5px solid rgb(255, 255, 255);
+  padding: 30px;
+}
+form h1 {
+  color: rgb(0, 0, 0);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 25px auto;
+}
+.container label {
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+div.inputs {
+  display: flex;
+  margin: 5px auto;
+}
+div.inputs input {
+  margin: auto 15px;
+  width: 200px;
+  height: 25px;
+  border-radius: 5px;
+}
+.container button {
+  margin-top: 30px;
+  width: 200px;
+  height: 40px;
+  padding: 5px;
+  background: rgb(5, 243, 17);
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.container2 button:hover {
+  background: rgb(0, 0, 0);
+}
+
+/* TABELA */
+table,
+tr {
+  border: 0px;
+}
+table {
+  margin: 20px auto;
+}
+thead {
+  background: rgb(243, 52, 4);
+  color: #ffffff;
+}
+
+thead tr th {
+  border: none;
+
+  padding: 10px;
+}
+
+td button {
+  width: 90px;
+  height: 35px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+td {
+  padding: 10px;
+  text-align: center;
+  background: rgb(117, 117, 117);
+  border: none;
+  font-weight: 800;
+  color: #030101;
+}
+td:nth-child(4) {
+  background: transparent;
+  border: none;
+}
+td.TD4 button {
+  width: 100px;
+  height: 40px;
+  margin: 0 6px;
+  padding: 3px;
+  border: none;
+  border-radius: 5px;
+  color: #000000;
+  cursor: pointer;
+}
+.vazio {
+  color: #030303;
+  background-color: #ff1100e1;
+  max-width: 780px;
+  height: auto;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.empty {
+  display: none;
+}
+/* DELETE */
+button.delete {
+  background: #ff4d4d;
+  color: white;
+}
+
+button.delete:hover {
+  background: #cc0000;
+}
+
+/* UPDATE */
+button.update {
+  background: #3399ff;
+  color: white;
+}
+
+button.update:hover {
+  background: #0066cc;
+}

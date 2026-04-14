@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabela de Estoque</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style1.css" />
+  </head>
+  <body>
+    <form>
+      <div class="container">
+        <h1>Cadastro de Produtos</h1>
+
+        <div class="inputs">
+          <label>
+            Nome do Produto:
+            <input type="text" id="Produto" minlength="2" />
+          </label>
+
+          <label>
+            Preço:
+            <input type="number" id="Preco" />
+          </label>
+
+          <label>
+            Quantidade:
+            <input type="number" id="Qnt" />
+          </label>
+        </div>
+
+        <button class="Add">CADASTRAR</button>
+      </div>
+    </form>
+
+    <table width="800" border="1">
+      <thead>
+        <tr>
+          <th>PRODUTO</th>
+          <th>PREÇO</th>
+          <th>QUANTIDADE</th>
+          <th>AÇÕES</th>
+        </tr>
+      </thead>
+      <tbody id="body"></tbody>
+    </table>
+
+    <h2 class="vazio">NENHUM PRODUTO CADASTRADO!</h2>
+
+    <!-- MODAL -->
+    <div class="modal none">
+      <button id="close">X</button>
+      <h2 id="productChangeName">Atualizar</h2>
+
+      <label>
+        Nome:
+        <input type="text" id="product" />
+      </label>
+
+      <label>
+        Preço:
+        <input type="number" id="price" />
+      </label>
+
+      <label>
+        Quantidade:
+        <input type="number" id="amount" />
+      </label>
+
+      <button id="update">ATUALIZAR</button>
+    </div>
+
+    <!-- IMPORTANTE -->
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
