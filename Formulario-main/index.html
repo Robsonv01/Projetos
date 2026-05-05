@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FORMULÁRIO CRUD</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Gerenciamento de Usuários</h1>
+
+      <form id="camisaForm">
+        <input type="hidden" id="userId" />
+        <input type="text" id="nome" placeholder="Nome" required />
+        <input type="text" id="nturma" placeholder="Nome/Turma" required />
+        <input type="text" id="tempo" placeholder="Tempo" required />
+
+        <label for="foto">Foto do Usuário:</label>
+        <input type="file" id="foto" accept="image/*" />
+
+        <button type="submit" id="btnSalvar">Salvar Aluno</button>
+      </form>
+
+      <ul id="listaAlunos"></ul>
+    </div>
+
+    <script type="module" src="script.js"></script>
+    <footer></footer>
+  </body>
+</html>
+
+
